@@ -5,12 +5,17 @@ from importlib import import_module
 import scanpydoc
 
 
+DEPRECATED = {"scanpydoc.definition_list_typed_field"}
+
+
 def test_all_get_installed(monkeypatch, make_app_no_setup):
     setups_seen = set()
     setups_called = {}
     for finder, mod_name, _ in pkgutil.walk_packages(
         scanpydoc.__path__, f"{scanpydoc.__name__}."
     ):
+        if mod_name in DEPRECATED:
+            continue
         mod = import_module(mod_name)
         setups_seen.add(mod_name)
         monkeypatch.setattr(mod, "setup", partial(setups_called.__setitem__, mod_name))

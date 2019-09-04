@@ -11,6 +11,7 @@ __pycache__/
 # Docs
 /docs/_build/
 /docs/scanpydoc.*.rst
+!/docs/scanpydoc.definition_list_typed_field.rst
 
 # IDEs
 /.idea/
